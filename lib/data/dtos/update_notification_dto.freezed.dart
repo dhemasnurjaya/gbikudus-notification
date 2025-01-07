@@ -21,9 +21,10 @@ UpdateNotificationDto _$UpdateNotificationDtoFromJson(
 
 /// @nodoc
 mixin _$UpdateNotificationDto {
+  String? get topic => throw _privateConstructorUsedError;
   String? get title => throw _privateConstructorUsedError;
-  DateTime? get sendDate => throw _privateConstructorUsedError;
-  bool? get isSent => throw _privateConstructorUsedError;
+  String? get body => throw _privateConstructorUsedError;
+  String? get schedule => throw _privateConstructorUsedError;
 
   /// Serializes this UpdateNotificationDto to a JSON map.
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
@@ -41,7 +42,7 @@ abstract class $UpdateNotificationDtoCopyWith<$Res> {
           $Res Function(UpdateNotificationDto) then) =
       _$UpdateNotificationDtoCopyWithImpl<$Res, UpdateNotificationDto>;
   @useResult
-  $Res call({String? title, DateTime? sendDate, bool? isSent});
+  $Res call({String? topic, String? title, String? body, String? schedule});
 }
 
 /// @nodoc
@@ -60,23 +61,28 @@ class _$UpdateNotificationDtoCopyWithImpl<$Res,
   @pragma('vm:prefer-inline')
   @override
   $Res call({
+    Object? topic = freezed,
     Object? title = freezed,
-    Object? sendDate = freezed,
-    Object? isSent = freezed,
+    Object? body = freezed,
+    Object? schedule = freezed,
   }) {
     return _then(_value.copyWith(
+      topic: freezed == topic
+          ? _value.topic
+          : topic // ignore: cast_nullable_to_non_nullable
+              as String?,
       title: freezed == title
           ? _value.title
           : title // ignore: cast_nullable_to_non_nullable
               as String?,
-      sendDate: freezed == sendDate
-          ? _value.sendDate
-          : sendDate // ignore: cast_nullable_to_non_nullable
-              as DateTime?,
-      isSent: freezed == isSent
-          ? _value.isSent
-          : isSent // ignore: cast_nullable_to_non_nullable
-              as bool?,
+      body: freezed == body
+          ? _value.body
+          : body // ignore: cast_nullable_to_non_nullable
+              as String?,
+      schedule: freezed == schedule
+          ? _value.schedule
+          : schedule // ignore: cast_nullable_to_non_nullable
+              as String?,
     ) as $Val);
   }
 }
@@ -90,7 +96,7 @@ abstract class _$$UpdateNotificationDtoImplCopyWith<$Res>
       __$$UpdateNotificationDtoImplCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call({String? title, DateTime? sendDate, bool? isSent});
+  $Res call({String? topic, String? title, String? body, String? schedule});
 }
 
 /// @nodoc
@@ -107,23 +113,28 @@ class __$$UpdateNotificationDtoImplCopyWithImpl<$Res>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
+    Object? topic = freezed,
     Object? title = freezed,
-    Object? sendDate = freezed,
-    Object? isSent = freezed,
+    Object? body = freezed,
+    Object? schedule = freezed,
   }) {
     return _then(_$UpdateNotificationDtoImpl(
+      topic: freezed == topic
+          ? _value.topic
+          : topic // ignore: cast_nullable_to_non_nullable
+              as String?,
       title: freezed == title
           ? _value.title
           : title // ignore: cast_nullable_to_non_nullable
               as String?,
-      sendDate: freezed == sendDate
-          ? _value.sendDate
-          : sendDate // ignore: cast_nullable_to_non_nullable
-              as DateTime?,
-      isSent: freezed == isSent
-          ? _value.isSent
-          : isSent // ignore: cast_nullable_to_non_nullable
-              as bool?,
+      body: freezed == body
+          ? _value.body
+          : body // ignore: cast_nullable_to_non_nullable
+              as String?,
+      schedule: freezed == schedule
+          ? _value.schedule
+          : schedule // ignore: cast_nullable_to_non_nullable
+              as String?,
     ));
   }
 }
@@ -131,21 +142,24 @@ class __$$UpdateNotificationDtoImplCopyWithImpl<$Res>
 /// @nodoc
 @JsonSerializable()
 class _$UpdateNotificationDtoImpl implements _UpdateNotificationDto {
-  const _$UpdateNotificationDtoImpl({this.title, this.sendDate, this.isSent});
+  const _$UpdateNotificationDtoImpl(
+      {this.topic, this.title, this.body, this.schedule});
 
   factory _$UpdateNotificationDtoImpl.fromJson(Map<String, dynamic> json) =>
       _$$UpdateNotificationDtoImplFromJson(json);
 
   @override
+  final String? topic;
+  @override
   final String? title;
   @override
-  final DateTime? sendDate;
+  final String? body;
   @override
-  final bool? isSent;
+  final String? schedule;
 
   @override
   String toString() {
-    return 'UpdateNotificationDto(title: $title, sendDate: $sendDate, isSent: $isSent)';
+    return 'UpdateNotificationDto(topic: $topic, title: $title, body: $body, schedule: $schedule)';
   }
 
   @override
@@ -153,15 +167,16 @@ class _$UpdateNotificationDtoImpl implements _UpdateNotificationDto {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$UpdateNotificationDtoImpl &&
+            (identical(other.topic, topic) || other.topic == topic) &&
             (identical(other.title, title) || other.title == title) &&
-            (identical(other.sendDate, sendDate) ||
-                other.sendDate == sendDate) &&
-            (identical(other.isSent, isSent) || other.isSent == isSent));
+            (identical(other.body, body) || other.body == body) &&
+            (identical(other.schedule, schedule) ||
+                other.schedule == schedule));
   }
 
   @JsonKey(includeFromJson: false, includeToJson: false)
   @override
-  int get hashCode => Object.hash(runtimeType, title, sendDate, isSent);
+  int get hashCode => Object.hash(runtimeType, topic, title, body, schedule);
 
   /// Create a copy of UpdateNotificationDto
   /// with the given fields replaced by the non-null parameter values.
@@ -182,19 +197,22 @@ class _$UpdateNotificationDtoImpl implements _UpdateNotificationDto {
 
 abstract class _UpdateNotificationDto implements UpdateNotificationDto {
   const factory _UpdateNotificationDto(
-      {final String? title,
-      final DateTime? sendDate,
-      final bool? isSent}) = _$UpdateNotificationDtoImpl;
+      {final String? topic,
+      final String? title,
+      final String? body,
+      final String? schedule}) = _$UpdateNotificationDtoImpl;
 
   factory _UpdateNotificationDto.fromJson(Map<String, dynamic> json) =
       _$UpdateNotificationDtoImpl.fromJson;
 
   @override
+  String? get topic;
+  @override
   String? get title;
   @override
-  DateTime? get sendDate;
+  String? get body;
   @override
-  bool? get isSent;
+  String? get schedule;
 
   /// Create a copy of UpdateNotificationDto
   /// with the given fields replaced by the non-null parameter values.

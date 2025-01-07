@@ -9,17 +9,17 @@ part of 'update_notification_dto.dart';
 _$UpdateNotificationDtoImpl _$$UpdateNotificationDtoImplFromJson(
         Map<String, dynamic> json) =>
     _$UpdateNotificationDtoImpl(
+      topic: json['topic'] as String?,
       title: json['title'] as String?,
-      sendDate: json['sendDate'] == null
-          ? null
-          : DateTime.parse(json['sendDate'] as String),
-      isSent: json['isSent'] as bool?,
+      body: json['body'] as String?,
+      schedule: json['schedule'] as String?,
     );
 
 Map<String, dynamic> _$$UpdateNotificationDtoImplToJson(
         _$UpdateNotificationDtoImpl instance) =>
     <String, dynamic>{
+      'topic': instance.topic,
       'title': instance.title,
-      'sendDate': instance.sendDate?.toIso8601String(),
-      'isSent': instance.isSent,
+      'body': instance.body,
+      'schedule': instance.schedule,
     };

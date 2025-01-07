@@ -18,8 +18,10 @@ Future<Response> onRequest(RequestContext context) async {
             .map(
               (e) => GetNotificationDto(
                 id: e.id,
+                topic: e.topic,
                 title: e.title,
-                sendDate: e.sendDate,
+                body: e.body,
+                schedule: e.schedule,
               ).toJson(),
             )
             .toList(),

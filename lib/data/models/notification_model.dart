@@ -8,8 +8,9 @@ part 'notification_model.freezed.dart';
 class NotificationModel with _$NotificationModel {
   const factory NotificationModel({
     required String id,
+    required String topic,
     required String title,
-    required DateTime sendDate,
-    required bool isSent,
+    required String body,
+    required String schedule,
   }) = _NotificationModel;
 }

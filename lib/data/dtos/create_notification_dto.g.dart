@@ -10,14 +10,18 @@ _$CreateNotificationDtoImpl _$$CreateNotificationDtoImplFromJson(
         Map<String, dynamic> json) =>
     _$CreateNotificationDtoImpl(
       id: json['id'] as String,
+      topic: json['topic'] as String,
       title: json['title'] as String,
-      sendDate: DateTime.parse(json['sendDate'] as String),
+      body: json['body'] as String,
+      schedule: json['schedule'] as String,
     );
 
 Map<String, dynamic> _$$CreateNotificationDtoImplToJson(
         _$CreateNotificationDtoImpl instance) =>
     <String, dynamic>{
       'id': instance.id,
+      'topic': instance.topic,
       'title': instance.title,
-      'sendDate': instance.sendDate.toIso8601String(),
+      'body': instance.body,
+      'schedule': instance.schedule,
     };

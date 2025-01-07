@@ -17,9 +17,10 @@ final _privateConstructorUsedError = UnsupportedError(
 /// @nodoc
 mixin _$NotificationModel {
   String get id => throw _privateConstructorUsedError;
+  String get topic => throw _privateConstructorUsedError;
   String get title => throw _privateConstructorUsedError;
-  DateTime get sendDate => throw _privateConstructorUsedError;
-  bool get isSent => throw _privateConstructorUsedError;
+  String get body => throw _privateConstructorUsedError;
+  String get schedule => throw _privateConstructorUsedError;
 
   /// Create a copy of NotificationModel
   /// with the given fields replaced by the non-null parameter values.
@@ -34,7 +35,8 @@ abstract class $NotificationModelCopyWith<$Res> {
           NotificationModel value, $Res Function(NotificationModel) then) =
       _$NotificationModelCopyWithImpl<$Res, NotificationModel>;
   @useResult
-  $Res call({String id, String title, DateTime sendDate, bool isSent});
+  $Res call(
+      {String id, String topic, String title, String body, String schedule});
 }
 
 /// @nodoc
@@ -53,27 +55,32 @@ class _$NotificationModelCopyWithImpl<$Res, $Val extends NotificationModel>
   @override
   $Res call({
     Object? id = null,
+    Object? topic = null,
     Object? title = null,
-    Object? sendDate = null,
-    Object? isSent = null,
+    Object? body = null,
+    Object? schedule = null,
   }) {
     return _then(_value.copyWith(
       id: null == id
           ? _value.id
           : id // ignore: cast_nullable_to_non_nullable
               as String,
+      topic: null == topic
+          ? _value.topic
+          : topic // ignore: cast_nullable_to_non_nullable
+              as String,
       title: null == title
           ? _value.title
           : title // ignore: cast_nullable_to_non_nullable
               as String,
-      sendDate: null == sendDate
-          ? _value.sendDate
-          : sendDate // ignore: cast_nullable_to_non_nullable
-              as DateTime,
-      isSent: null == isSent
-          ? _value.isSent
-          : isSent // ignore: cast_nullable_to_non_nullable
-              as bool,
+      body: null == body
+          ? _value.body
+          : body // ignore: cast_nullable_to_non_nullable
+              as String,
+      schedule: null == schedule
+          ? _value.schedule
+          : schedule // ignore: cast_nullable_to_non_nullable
+              as String,
     ) as $Val);
   }
 }
@@ -86,7 +93,8 @@ abstract class _$$NotificationModelImplCopyWith<$Res>
       __$$NotificationModelImplCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call({String id, String title, DateTime sendDate, bool isSent});
+  $Res call(
+      {String id, String topic, String title, String body, String schedule});
 }
 
 /// @nodoc
@@ -103,27 +111,32 @@ class __$$NotificationModelImplCopyWithImpl<$Res>
   @override
   $Res call({
     Object? id = null,
+    Object? topic = null,
     Object? title = null,
-    Object? sendDate = null,
-    Object? isSent = null,
+    Object? body = null,
+    Object? schedule = null,
   }) {
     return _then(_$NotificationModelImpl(
       id: null == id
           ? _value.id
           : id // ignore: cast_nullable_to_non_nullable
               as String,
+      topic: null == topic
+          ? _value.topic
+          : topic // ignore: cast_nullable_to_non_nullable
+              as String,
       title: null == title
           ? _value.title
           : title // ignore: cast_nullable_to_non_nullable
               as String,
-      sendDate: null == sendDate
-          ? _value.sendDate
-          : sendDate // ignore: cast_nullable_to_non_nullable
-              as DateTime,
-      isSent: null == isSent
-          ? _value.isSent
-          : isSent // ignore: cast_nullable_to_non_nullable
-              as bool,
+      body: null == body
+          ? _value.body
+          : body // ignore: cast_nullable_to_non_nullable
+              as String,
+      schedule: null == schedule
+          ? _value.schedule
+          : schedule // ignore: cast_nullable_to_non_nullable
+              as String,
     ));
   }
 }
@@ -133,22 +146,25 @@ class __$$NotificationModelImplCopyWithImpl<$Res>
 class _$NotificationModelImpl implements _NotificationModel {
   const _$NotificationModelImpl(
       {required this.id,
+      required this.topic,
       required this.title,
-      required this.sendDate,
-      required this.isSent});
+      required this.body,
+      required this.schedule});
 
   @override
   final String id;
   @override
+  final String topic;
+  @override
   final String title;
   @override
-  final DateTime sendDate;
+  final String body;
   @override
-  final bool isSent;
+  final String schedule;
 
   @override
   String toString() {
-    return 'NotificationModel(id: $id, title: $title, sendDate: $sendDate, isSent: $isSent)';
+    return 'NotificationModel(id: $id, topic: $topic, title: $title, body: $body, schedule: $schedule)';
   }
 
   @override
@@ -157,14 +173,16 @@ class _$NotificationModelImpl implements _NotificationModel {
         (other.runtimeType == runtimeType &&
             other is _$NotificationModelImpl &&
             (identical(other.id, id) || other.id == id) &&
+            (identical(other.topic, topic) || other.topic == topic) &&
             (identical(other.title, title) || other.title == title) &&
-            (identical(other.sendDate, sendDate) ||
-                other.sendDate == sendDate) &&
-            (identical(other.isSent, isSent) || other.isSent == isSent));
+            (identical(other.body, body) || other.body == body) &&
+            (identical(other.schedule, schedule) ||
+                other.schedule == schedule));
   }
 
   @override
-  int get hashCode => Object.hash(runtimeType, id, title, sendDate, isSent);
+  int get hashCode =>
+      Object.hash(runtimeType, id, topic, title, body, schedule);
 
   /// Create a copy of NotificationModel
   /// with the given fields replaced by the non-null parameter values.
@@ -179,18 +197,21 @@ class _$NotificationModelImpl implements _NotificationModel {
 abstract class _NotificationModel implements NotificationModel {
   const factory _NotificationModel(
       {required final String id,
+      required final String topic,
       required final String title,
-      required final DateTime sendDate,
-      required final bool isSent}) = _$NotificationModelImpl;
+      required final String body,
+      required final String schedule}) = _$NotificationModelImpl;
 
   @override
   String get id;
   @override
+  String get topic;
+  @override
   String get title;
   @override
-  DateTime get sendDate;
+  String get body;
   @override
-  bool get isSent;
+  String get schedule;
 
   /// Create a copy of NotificationModel
   /// with the given fields replaced by the non-null parameter values.

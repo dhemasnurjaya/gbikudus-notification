@@ -8,9 +8,10 @@ part 'update_notification_dto.g.dart';
 @freezed
 class UpdateNotificationDto with _$UpdateNotificationDto {
   const factory UpdateNotificationDto({
+    String? topic,
     String? title,
-    DateTime? sendDate,
-    bool? isSent,
+    String? body,
+    String? schedule,
   }) = _UpdateNotificationDto;
 
   factory UpdateNotificationDto.fromJson(Map<String, dynamic> json) =>

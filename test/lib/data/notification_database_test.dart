@@ -13,19 +13,22 @@ void main() {
   late NotificationDatabase database;
 
   setUp(() {
-    database = NotificationDatabaseImpl()..init(path: testDbPath);
+    database = NotificationDatabaseImpl()..open(path: testDbPath);
   });
 
   tearDown(() {
+    database.close();
     File(testDbPath).deleteSync();
   });
 
   test('should create notification', () {
     // arrange
-    final notification = CreateNotificationDto(
+    const notification = CreateNotificationDto(
       id: '1',
-      title: 'Hello, World!',
-      sendDate: DateTime.now(),
+      topic: 'topic',
+      title: 'Hello',
+      body: 'World',
+      schedule: '* * * * *',
     );
 
     // act
@@ -35,16 +38,20 @@ void main() {
     final notifications = database.list();
     expect(notifications.length, 1);
     expect(notifications.first.id, notification.id);
+    expect(notifications.first.topic, notification.topic);
     expect(notifications.first.title, notification.title);
-    expect(notifications.first.sendDate, notification.sendDate);
+    expect(notifications.first.body, notification.body);
+    expect(notifications.first.schedule, notification.schedule);
   });
 
   test('should delete notification', () {
     // arrange
-    final notification = CreateNotificationDto(
+    const notification = CreateNotificationDto(
       id: '1',
-      title: 'Hello, World!',
-      sendDate: DateTime.now(),
+      topic: 'topic',
+      title: 'Hello',
+      body: 'World',
+      schedule: '* * * * *',
     );
     database.createNotification(notification);
 
@@ -58,20 +65,23 @@ void main() {
 
   test('should update notification', () {
     // arrange
-    final notification = CreateNotificationDto(
+    const notification = CreateNotificationDto(
       id: '1',
-      title: 'Hello, World!',
-      sendDate: DateTime.now(),
+      topic: 'topic',
+      title: 'Hello',
+      body: 'World',
+      schedule: '* * * * *',
     );
     database.createNotification(notification);
 
     // act
     database.updateNotification(
       notification.id,
-      UpdateNotificationDto(
-        title: 'Hello, Dart!',
-        sendDate: DateTime.now(),
-        isSent: false,
+      const UpdateNotificationDto(
+        topic: 'new topic',
+        title: 'Hi',
+        body: 'Dart',
+        schedule: '*/5 * * * *',
       ),
     );
 
@@ -79,20 +89,27 @@ void main() {
     final notifications = database.list();
     expect(notifications.length, 1);
     expect(notifications.first.id, notification.id);
-    expect(notifications.first.title, 'Hello, Dart!');
+    expect(notifications.first.topic, 'new topic');
+    expect(notifications.first.title, 'Hi');
+    expect(notifications.first.body, 'Dart');
+    expect(notifications.first.schedule, '*/5 * * * *');
   });
 
   test('should list notifications', () {
     // arrange
-    final notification1 = CreateNotificationDto(
+    const notification1 = CreateNotificationDto(
       id: '1',
+      topic: 'topic',
       title: 'Hello, World!',
-      sendDate: DateTime.now(),
+      body: 'Hello, World!',
+      schedule: '* * * * *',
     );
-    final notification2 = CreateNotificationDto(
+    const notification2 = CreateNotificationDto(
       id: '2',
-      title: 'Hello, Dart!',
-      sendDate: DateTime.now(),
+      topic: 'topic',
+      title: 'Hello, World!',
+      body: 'Hello, World!',
+      schedule: '* * * * *',
     );
     database.createNotification(notification1);
     database.createNotification(notification2);

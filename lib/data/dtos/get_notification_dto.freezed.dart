@@ -21,8 +21,10 @@ GetNotificationDto _$GetNotificationDtoFromJson(Map<String, dynamic> json) {
 /// @nodoc
 mixin _$GetNotificationDto {
   String get id => throw _privateConstructorUsedError;
+  String get topic => throw _privateConstructorUsedError;
   String get title => throw _privateConstructorUsedError;
-  DateTime get sendDate => throw _privateConstructorUsedError;
+  String get body => throw _privateConstructorUsedError;
+  String get schedule => throw _privateConstructorUsedError;
 
   /// Serializes this GetNotificationDto to a JSON map.
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
@@ -40,7 +42,8 @@ abstract class $GetNotificationDtoCopyWith<$Res> {
           GetNotificationDto value, $Res Function(GetNotificationDto) then) =
       _$GetNotificationDtoCopyWithImpl<$Res, GetNotificationDto>;
   @useResult
-  $Res call({String id, String title, DateTime sendDate});
+  $Res call(
+      {String id, String topic, String title, String body, String schedule});
 }
 
 /// @nodoc
@@ -59,22 +62,32 @@ class _$GetNotificationDtoCopyWithImpl<$Res, $Val extends GetNotificationDto>
   @override
   $Res call({
     Object? id = null,
+    Object? topic = null,
     Object? title = null,
-    Object? sendDate = null,
+    Object? body = null,
+    Object? schedule = null,
   }) {
     return _then(_value.copyWith(
       id: null == id
           ? _value.id
           : id // ignore: cast_nullable_to_non_nullable
               as String,
+      topic: null == topic
+          ? _value.topic
+          : topic // ignore: cast_nullable_to_non_nullable
+              as String,
       title: null == title
           ? _value.title
           : title // ignore: cast_nullable_to_non_nullable
               as String,
-      sendDate: null == sendDate
-          ? _value.sendDate
-          : sendDate // ignore: cast_nullable_to_non_nullable
-              as DateTime,
+      body: null == body
+          ? _value.body
+          : body // ignore: cast_nullable_to_non_nullable
+              as String,
+      schedule: null == schedule
+          ? _value.schedule
+          : schedule // ignore: cast_nullable_to_non_nullable
+              as String,
     ) as $Val);
   }
 }
@@ -87,7 +100,8 @@ abstract class _$$GetNotificationDtoImplCopyWith<$Res>
       __$$GetNotificationDtoImplCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call({String id, String title, DateTime sendDate});
+  $Res call(
+      {String id, String topic, String title, String body, String schedule});
 }
 
 /// @nodoc
@@ -104,22 +118,32 @@ class __$$GetNotificationDtoImplCopyWithImpl<$Res>
   @override
   $Res call({
     Object? id = null,
+    Object? topic = null,
     Object? title = null,
-    Object? sendDate = null,
+    Object? body = null,
+    Object? schedule = null,
   }) {
     return _then(_$GetNotificationDtoImpl(
       id: null == id
           ? _value.id
           : id // ignore: cast_nullable_to_non_nullable
               as String,
+      topic: null == topic
+          ? _value.topic
+          : topic // ignore: cast_nullable_to_non_nullable
+              as String,
       title: null == title
           ? _value.title
           : title // ignore: cast_nullable_to_non_nullable
               as String,
-      sendDate: null == sendDate
-          ? _value.sendDate
-          : sendDate // ignore: cast_nullable_to_non_nullable
-              as DateTime,
+      body: null == body
+          ? _value.body
+          : body // ignore: cast_nullable_to_non_nullable
+              as String,
+      schedule: null == schedule
+          ? _value.schedule
+          : schedule // ignore: cast_nullable_to_non_nullable
+              as String,
     ));
   }
 }
@@ -128,7 +152,11 @@ class __$$GetNotificationDtoImplCopyWithImpl<$Res>
 @JsonSerializable()
 class _$GetNotificationDtoImpl implements _GetNotificationDto {
   const _$GetNotificationDtoImpl(
-      {required this.id, required this.title, required this.sendDate});
+      {required this.id,
+      required this.topic,
+      required this.title,
+      required this.body,
+      required this.schedule});
 
   factory _$GetNotificationDtoImpl.fromJson(Map<String, dynamic> json) =>
       _$$GetNotificationDtoImplFromJson(json);
@@ -136,13 +164,17 @@ class _$GetNotificationDtoImpl implements _GetNotificationDto {
   @override
   final String id;
   @override
+  final String topic;
+  @override
   final String title;
   @override
-  final DateTime sendDate;
+  final String body;
+  @override
+  final String schedule;
 
   @override
   String toString() {
-    return 'GetNotificationDto(id: $id, title: $title, sendDate: $sendDate)';
+    return 'GetNotificationDto(id: $id, topic: $topic, title: $title, body: $body, schedule: $schedule)';
   }
 
   @override
@@ -151,14 +183,17 @@ class _$GetNotificationDtoImpl implements _GetNotificationDto {
         (other.runtimeType == runtimeType &&
             other is _$GetNotificationDtoImpl &&
             (identical(other.id, id) || other.id == id) &&
+            (identical(other.topic, topic) || other.topic == topic) &&
             (identical(other.title, title) || other.title == title) &&
-            (identical(other.sendDate, sendDate) ||
-                other.sendDate == sendDate));
+            (identical(other.body, body) || other.body == body) &&
+            (identical(other.schedule, schedule) ||
+                other.schedule == schedule));
   }
 
   @JsonKey(includeFromJson: false, includeToJson: false)
   @override
-  int get hashCode => Object.hash(runtimeType, id, title, sendDate);
+  int get hashCode =>
+      Object.hash(runtimeType, id, topic, title, body, schedule);
 
   /// Create a copy of GetNotificationDto
   /// with the given fields replaced by the non-null parameter values.
@@ -180,8 +215,10 @@ class _$GetNotificationDtoImpl implements _GetNotificationDto {
 abstract class _GetNotificationDto implements GetNotificationDto {
   const factory _GetNotificationDto(
       {required final String id,
+      required final String topic,
       required final String title,
-      required final DateTime sendDate}) = _$GetNotificationDtoImpl;
+      required final String body,
+      required final String schedule}) = _$GetNotificationDtoImpl;
 
   factory _GetNotificationDto.fromJson(Map<String, dynamic> json) =
       _$GetNotificationDtoImpl.fromJson;
@@ -189,9 +226,13 @@ abstract class _GetNotificationDto implements GetNotificationDto {
   @override
   String get id;
   @override
+  String get topic;
+  @override
   String get title;
   @override
-  DateTime get sendDate;
+  String get body;
+  @override
+  String get schedule;
 
   /// Create a copy of GetNotificationDto
   /// with the given fields replaced by the non-null parameter values.

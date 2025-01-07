@@ -9,8 +9,10 @@ part 'get_notification_dto.g.dart';
 class GetNotificationDto with _$GetNotificationDto {
   const factory GetNotificationDto({
     required String id,
+    required String topic,
     required String title,
-    required DateTime sendDate,
+    required String body,
+    required String schedule,
   }) = _GetNotificationDto;
 
   factory GetNotificationDto.fromJson(Map<String, dynamic> json) =>
