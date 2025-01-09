@@ -13,6 +13,7 @@ dependencies:
   googleapis_auth: ^1.6.0
   http: ^1.2.2
   json_annotation: ^4.9.0
+  shelf_cors_headers: ^0.1.5
   sqlite3: ^2.5.0
 
 dev_dependencies:
