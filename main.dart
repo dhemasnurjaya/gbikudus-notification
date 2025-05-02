@@ -1,17 +1,17 @@
 import 'dart:io';
 
 import 'package:dart_frog/dart_frog.dart';
-import 'package:gbikudus_notification/data/notification_database.dart';
+import 'package:gbikudus_notification/domain/repositories/church_event_notification_repositories.dart';
+import 'package:gbikudus_notification/injection_container.dart';
 
-Future<HttpServer> run(Handler handler, InternetAddress ip, int port) {
-  final notificationDatabase = NotificationDatabaseImpl()..open();
-
-  // TODO: start periodic task to send notifications
+Future<HttpServer> run(Handler handler, InternetAddress ip, int port) async {
+  // injection container
+  final ic = InjectionContainer();
 
   return serve(
     handler.use(
-      provider<NotificationDatabase>((context) {
-        return notificationDatabase;
+      provider<ChurchEventRepository>((context) {
+        return ic.churchEventRepository;
       }),
     ),
     ip,

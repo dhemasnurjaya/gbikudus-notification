@@ -8,9 +8,12 @@ environment:
 
 dependencies:
   dart_frog: ^1.1.0
+  equatable: ^2.0.7
+  fpdart: ^1.1.1
   freezed_annotation: ^2.4.4
   googleapis: ^13.2.0
   googleapis_auth: ^1.6.0
+  hive_ce: ^2.11.0
   http: ^1.2.2
   json_annotation: ^4.9.0
   shelf_cors_headers: ^0.1.5
