@@ -1,10 +1,14 @@
 import 'package:gbikudus_notification/core/network.dart';
 import 'package:gbikudus_notification/data/local/data_sources/church_event_notification_local_data_source.dart';
+import 'package:gbikudus_notification/data/local/hive_adapters/hive_adapters.dart';
+import 'package:gbikudus_notification/data/local/hive_adapters/hive_registrar.g.dart';
 import 'package:gbikudus_notification/data/local/local_database.dart';
 import 'package:gbikudus_notification/data/local/models/church_event_notification_model.dart';
 import 'package:gbikudus_notification/data/remote/data_sources/church_event_remote_data_source.dart';
 import 'package:gbikudus_notification/data/repositories/church_event_repository_impl.dart';
-import 'package:gbikudus_notification/domain/repositories/church_event_notification_repositories.dart';
+import 'package:gbikudus_notification/domain/repositories/church_event_notification_repository.dart';
+import 'package:gbikudus_notification/domain/use_cases/list_church_events.dart';
+import 'package:gbikudus_notification/domain/use_cases/sync_church_events.dart';
 import 'package:hive_ce/hive.dart';
 
 /// A container for dependency injection.
@@ -18,6 +22,19 @@ class InjectionContainer {
 
   InjectionContainer._internal();
   static final InjectionContainer _instance = InjectionContainer._internal();
+
+  /// Initializes the container, must be called before using the container.
+  Future<void> init() async {
+    // Initialize Hive and register adapters
+    Hive
+      ..init('hive.db')
+      ..registerAdapters();
+
+    // Open Hive boxes
+    await Hive.openBox<ChurchEventNotificationModel>(
+      churchEventNotificationBoxName,
+    );
+  }
 
   // declarations --------------------------------------------------------------
 
@@ -35,6 +52,10 @@ class InjectionContainer {
   // repositories
   ChurchEventRepository? _churchEventRepository;
 
+  // use cases
+  SyncChurchEvents? _syncChurchEvents;
+  ListChurchEvents? _listChurchEvents;
+
   // instances -----------------------------------------------------------------
 
   /// [Network] instance, used for network operations.
@@ -50,7 +71,7 @@ class InjectionContainer {
   /// [Hive] instance, used for local storage of church event notifications.
   Box<ChurchEventNotificationModel> get churchEventNotificationBox =>
       _churchEventNotificationBox ??= Hive.box<ChurchEventNotificationModel>(
-        'church_event_notification',
+        churchEventNotificationBoxName,
       );
 
   /// [LocalDatabase] instance, interacts with the local storage of church
@@ -68,4 +89,12 @@ class InjectionContainer {
         remoteDataSource: churchEventRemoteDataSource,
         localDataSource: churchEventNotificationLocalDataSource,
       );
+
+  /// [SyncChurchEvents] use case instance
+  SyncChurchEvents get syncChurchEvents => _syncChurchEvents ??=
+      SyncChurchEvents(churchEventRepository: churchEventRepository);
+
+  /// [ListChurchEvents] use case instance
+  ListChurchEvents get listChurchEvents => _listChurchEvents ??=
+      ListChurchEvents(churchEventRepository: churchEventRepository);
 }

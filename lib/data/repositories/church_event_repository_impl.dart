@@ -4,7 +4,7 @@ import 'package:gbikudus_notification/data/local/local_database.dart';
 import 'package:gbikudus_notification/data/local/models/church_event_notification_model.dart';
 import 'package:gbikudus_notification/data/remote/data_sources/church_event_remote_data_source.dart';
 import 'package:gbikudus_notification/domain/entities/church_event.dart';
-import 'package:gbikudus_notification/domain/repositories/church_event_notification_repositories.dart';
+import 'package:gbikudus_notification/domain/repositories/church_event_notification_repository.dart';
 
 /// Concrete implementation of the [ChurchEventRepository] interface.
 class ChurchEventRepositoryImpl extends ChurchEventRepository {
@@ -21,7 +21,26 @@ class ChurchEventRepositoryImpl extends ChurchEventRepository {
 
   @override
   Future<Either<Failure, List<ChurchEvent>>> getChurchEvents() async {
-    throw UnimplementedError();
+    try {
+      final churchEventNotificationModels = await _localDataSource.list();
+      final churchEvents = churchEventNotificationModels
+          .map(
+            (model) => ChurchEvent(
+              id: model.id,
+              startDate: DateTime.parse(model.startDate),
+              endDate: DateTime.parse(model.endDate),
+              title: model.title,
+              image: model.image,
+              isNotificationSent: model.isNotificationSent,
+            ),
+          )
+          .toList();
+      return Right(churchEvents);
+    } on Exception catch (e) {
+      return Left(
+        CacheFailure(message: 'Failed to get church events', cause: e),
+      );
+    }
   }
 
   @override

@@ -1,14 +1,14 @@
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:gbikudus_notification/domain/entities/church_event.dart';
 
-part 'get_church_events_dto.g.dart';
+part 'get_church_event_dto.g.dart';
 
 /// A data transfer object (DTO) for getting church events.
 @JsonSerializable()
-class GetChurchEventsDto {
-  /// Creates a new instance of [GetChurchEventsDto].
+class GetChurchEventDto {
+  /// Creates a new instance of [GetChurchEventDto].
   /// Properties are the same as the [ChurchEvent] entity.
-  const GetChurchEventsDto({
+  const GetChurchEventDto({
     required this.id,
     required this.startDate,
     required this.endDate,
@@ -17,12 +17,12 @@ class GetChurchEventsDto {
     required this.isNotificationSent,
   });
 
-  /// Deserializes JSON into a [GetChurchEventsDto] instance.
-  factory GetChurchEventsDto.fromJson(Map<String, dynamic> json) =>
-      _$GetChurchEventsDtoFromJson(json);
+  /// Deserializes JSON into a [GetChurchEventDto] instance.
+  factory GetChurchEventDto.fromJson(Map<String, dynamic> json) =>
+      _$GetChurchEventDtoFromJson(json);
 
-  /// Serializes a [GetChurchEventsDto] instance into JSON.
-  Map<String, dynamic> toJson() => _$GetChurchEventsDtoToJson(this);
+  /// Serializes a [GetChurchEventDto] instance into JSON.
+  Map<String, dynamic> toJson() => _$GetChurchEventDtoToJson(this);
 
   /// Church Event ID.
   final int id;

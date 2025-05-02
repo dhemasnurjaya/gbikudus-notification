@@ -178,15 +178,15 @@ class __$$ChurchEventNotificationModelImplCopyWithImpl<$Res>
 
 /// @nodoc
 @JsonSerializable()
-class _$ChurchEventNotificationModelImpl
-    implements _ChurchEventNotificationModel {
-  const _$ChurchEventNotificationModelImpl(
+class _$ChurchEventNotificationModelImpl extends _ChurchEventNotificationModel {
+  _$ChurchEventNotificationModelImpl(
       {required this.id,
       required this.startDate,
       required this.endDate,
       required this.title,
       required this.image,
-      this.isNotificationSent = false});
+      this.isNotificationSent = false})
+      : super._();
 
   factory _$ChurchEventNotificationModelImpl.fromJson(
           Map<String, dynamic> json) =>
@@ -250,14 +250,15 @@ class _$ChurchEventNotificationModelImpl
 }
 
 abstract class _ChurchEventNotificationModel
-    implements ChurchEventNotificationModel {
-  const factory _ChurchEventNotificationModel(
+    extends ChurchEventNotificationModel {
+  factory _ChurchEventNotificationModel(
       {required final int id,
       required final String startDate,
       required final String endDate,
       required final String title,
       required final String image,
       final bool isNotificationSent}) = _$ChurchEventNotificationModelImpl;
+  _ChurchEventNotificationModel._() : super._();
 
   factory _ChurchEventNotificationModel.fromJson(Map<String, dynamic> json) =
       _$ChurchEventNotificationModelImpl.fromJson;

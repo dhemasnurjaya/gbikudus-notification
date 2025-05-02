@@ -1,31 +1,75 @@
 import 'package:dart_frog/dart_frog.dart';
-import 'package:gbikudus_notification/domain/repositories/church_event_notification_repositories.dart';
+import 'package:gbikudus_notification/core/use_case.dart';
+import 'package:gbikudus_notification/data/remote/dtos/get_church_event_dto.dart';
+import 'package:gbikudus_notification/domain/use_cases/list_church_events.dart';
+import 'package:gbikudus_notification/domain/use_cases/sync_church_events.dart';
 
 Future<Response> onRequest(RequestContext context) async {
   final method = context.request.method;
-  final churchEventRepository = context.read<ChurchEventRepository>();
 
-  try {
-    if (method == HttpMethod.post) {
-      await churchEventRepository.syncChurchEvents();
+  if (method == HttpMethod.get) {
+    return _onGet(context);
+  }
 
-      return Response.json(
-        body: {
-          'message': 'Church events synced successfully',
-        },
-      );
-    }
-  } catch (e) {
-    return Response.json(
-      statusCode: 500,
-      body: {
-        'error': e.toString(),
-      },
-    );
+  if (method == HttpMethod.post) {
+    return _onPost(context);
   }
 
   return Response.json(
     statusCode: 400,
     body: {'message': 'Bad Request'},
+  );
+}
+
+Future<Response> _onPost(RequestContext context) async {
+  final syncChurchEvents = context.read<SyncChurchEvents>();
+  final result = await syncChurchEvents(const NoParams());
+  return result.fold(
+    (failure) {
+      return Response.json(
+        statusCode: 500,
+        body: {
+          'error': failure.message,
+        },
+      );
+    },
+    (success) {
+      return Response.json(
+        body: {
+          'message': 'Sync successful',
+        },
+      );
+    },
+  );
+}
+
+Future<Response> _onGet(RequestContext context) async {
+  final listChurchEvents = context.read<ListChurchEvents>();
+  final churchEvents = await listChurchEvents(const NoParams());
+  return churchEvents.fold(
+    (failure) {
+      return Response.json(
+        statusCode: 500,
+        body: {
+          'error': failure.message,
+        },
+      );
+    },
+    (events) {
+      return Response.json(
+        body: events
+            .map(
+              (event) => GetChurchEventDto(
+                id: event.id,
+                startDate: event.startDate,
+                endDate: event.endDate,
+                title: event.title,
+                image: event.image,
+                isNotificationSent: event.isNotificationSent,
+              ).toJson(),
+            )
+            .toList(),
+      );
+    },
   );
 }

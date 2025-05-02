@@ -6,6 +6,7 @@ import 'package:gbikudus_notification/data/remote/data_sources/church_event_remo
 import 'package:gbikudus_notification/data/remote/models/church_event_model.dart';
 import 'package:gbikudus_notification/data/remote/models/directus_response.dart';
 import 'package:gbikudus_notification/data/repositories/church_event_repository_impl.dart';
+import 'package:gbikudus_notification/domain/entities/church_event.dart';
 import 'package:mocktail/mocktail.dart';
 import 'package:test/test.dart';
 
@@ -29,6 +30,59 @@ void main() {
       remoteDataSource: mockRemoteDataSource,
       localDataSource: mockLocalDataSource,
     );
+  });
+
+  group('getChurchEvents', () {
+    test('should return a list of church event from local data source',
+        () async {
+      // arrange
+      const tChurchEventModel = ChurchEventModel(
+        id: 1,
+        title: 'Test Event',
+        startDate: '2025-01-01',
+        endDate: '2025-01-02',
+        image: 'image',
+      );
+      final tChurchEventNotificationModel = ChurchEventNotificationModel(
+        id: tChurchEventModel.id,
+        startDate: tChurchEventModel.startDate,
+        endDate: tChurchEventModel.endDate,
+        title: tChurchEventModel.title,
+        image: tChurchEventModel.image,
+      );
+      when(() => mockLocalDataSource.list()).thenAnswer(
+        (_) async => [tChurchEventNotificationModel],
+      );
+
+      // act
+      final result = await repository.getChurchEvents();
+
+      // assert
+      final tExpected = [
+        ChurchEvent(
+          id: tChurchEventModel.id,
+          title: tChurchEventModel.title,
+          startDate: DateTime.parse(tChurchEventModel.startDate),
+          endDate: DateTime.parse(tChurchEventModel.endDate),
+          image: tChurchEventModel.image,
+          isNotificationSent: tChurchEventNotificationModel.isNotificationSent,
+        ),
+      ];
+      expect(result, isRightThat(equals(tExpected)));
+      verify(() => mockLocalDataSource.list());
+    });
+
+    test('should return CacheFailure when local data source fails', () async {
+      // arrange
+      when(() => mockLocalDataSource.list()).thenThrow(Exception());
+
+      // act
+      final result = await repository.getChurchEvents();
+
+      // assert
+      expect(result, isLeftThat(isA<CacheFailure>()));
+      verify(() => mockLocalDataSource.list());
+    });
   });
 
   group('syncChurchEvents', () {
