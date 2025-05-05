@@ -56,6 +56,9 @@ class ChurchEventRepositoryImpl extends ChurchEventRepository {
 
   @override
   Future<Either<Failure, void>> syncChurchEvents() async {
+    // TODO(dhemas): use [ChurchEventNotificationModel] isDeleted field
+    //  to delete the event from the local database if the event is deleted
+    //  in the remote data source
     try {
       final churchEvents = await _remoteDataSource.getChurchEvents();
       final churchEventModels = churchEvents.data;

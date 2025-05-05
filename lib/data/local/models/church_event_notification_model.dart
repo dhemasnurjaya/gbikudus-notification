@@ -6,6 +6,9 @@ import 'package:hive_ce/hive.dart';
 part 'church_event_notification_model.freezed.dart';
 part 'church_event_notification_model.g.dart';
 
+// TODO(dhemas): add isDeleted field to indicate if the event is deleted in
+//  the remote data source
+
 /// Represents a church event notification model that stored in the
 /// [ChurchEventNotificationLocalDataSource] local database.
 @freezed
