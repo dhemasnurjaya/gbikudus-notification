@@ -1,0 +1,28 @@
+name: 🐞 Test
+run-name: ${{ github.actor }} is testing the code for 🐞🐞🐞
+on:
+  push:
+    branches:
+      - main
+      - dev
+  pull_request: {}
+
+permissions:
+  actions: write
+  contents: read
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - run: echo "Cloning repository ${{ github.repository }}..."
+      - name: Check out repository code
+        uses: actions/checkout@v4
+      - run: echo "Testing ${{ github.ref }} branch..."
+      - uses: dart-lang/setup-dart@v1
+      - run: dart --version
+      - run: dart pub get
+      - run: dart format --set-exit-if-changed .
+      - run: dart analyze .
+      - run: dart test
+      - run: echo "🐞 Test job status is ${{ job.status }}."
