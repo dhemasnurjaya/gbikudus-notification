@@ -14,7 +14,9 @@ _$ChurchEventNotificationModelImpl _$$ChurchEventNotificationModelImplFromJson(
       endDate: json['endDate'] as String,
       title: json['title'] as String,
       image: json['image'] as String,
-      isNotificationSent: json['isNotificationSent'] as bool? ?? false,
+      sentAt: json['sentAt'] == null
+          ? null
+          : DateTime.parse(json['sentAt'] as String),
     );
 
 Map<String, dynamic> _$$ChurchEventNotificationModelImplToJson(
@@ -25,5 +27,5 @@ Map<String, dynamic> _$$ChurchEventNotificationModelImplToJson(
       'endDate': instance.endDate,
       'title': instance.title,
       'image': instance.image,
-      'isNotificationSent': instance.isNotificationSent,
+      'sentAt': instance.sentAt?.toIso8601String(),
     };

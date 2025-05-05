@@ -5,17 +5,17 @@ nextTypeId: 1
 types:
   ChurchEventNotificationModel:
     typeId: 0
-    nextIndex: 6
+    nextIndex: 25
     fields:
       id:
-        index: 0
+        index: 18
       startDate:
-        index: 1
+        index: 19
       endDate:
-        index: 2
+        index: 20
       title:
-        index: 3
+        index: 21
       image:
-        index: 4
-      isNotificationSent:
-        index: 5
+        index: 22
+      sentAt:
+        index: 23

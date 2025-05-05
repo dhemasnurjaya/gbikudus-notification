@@ -16,7 +16,7 @@ sealed class ChurchEventNotificationModel extends HiveObject
     required String endDate,
     required String title,
     required String image,
-    @Default(false) bool isNotificationSent,
+    DateTime? sentAt,
   }) = _ChurchEventNotificationModel;
 
   ChurchEventNotificationModel._();

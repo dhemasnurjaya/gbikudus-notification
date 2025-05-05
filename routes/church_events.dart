@@ -2,7 +2,6 @@ import 'package:dart_frog/dart_frog.dart';
 import 'package:gbikudus_notification/core/use_case.dart';
 import 'package:gbikudus_notification/data/remote/dtos/get_church_event_dto.dart';
 import 'package:gbikudus_notification/domain/use_cases/list_church_events.dart';
-import 'package:gbikudus_notification/domain/use_cases/sync_church_events.dart';
 
 Future<Response> onRequest(RequestContext context) async {
   final method = context.request.method;
@@ -11,35 +10,9 @@ Future<Response> onRequest(RequestContext context) async {
     return _onGet(context);
   }
 
-  if (method == HttpMethod.post) {
-    return _onPost(context);
-  }
-
   return Response.json(
     statusCode: 400,
     body: {'message': 'Bad Request'},
-  );
-}
-
-Future<Response> _onPost(RequestContext context) async {
-  final syncChurchEvents = context.read<SyncChurchEvents>();
-  final result = await syncChurchEvents(const NoParams());
-  return result.fold(
-    (failure) {
-      return Response.json(
-        statusCode: 500,
-        body: {
-          'error': failure.message,
-        },
-      );
-    },
-    (success) {
-      return Response.json(
-        body: {
-          'message': 'Sync successful',
-        },
-      );
-    },
   );
 }
 
@@ -65,7 +38,7 @@ Future<Response> _onGet(RequestContext context) async {
                 endDate: event.endDate,
                 title: event.title,
                 image: event.image,
-                isNotificationSent: event.isNotificationSent,
+                sentAt: event.sentAt,
               ).toJson(),
             )
             .toList(),

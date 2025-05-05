@@ -1,4 +1,6 @@
+import 'package:gbikudus_notification/core/cloud_messaging.dart';
 import 'package:gbikudus_notification/core/network.dart';
+import 'package:gbikudus_notification/core/time.dart';
 import 'package:gbikudus_notification/data/local/data_sources/church_event_notification_local_data_source.dart';
 import 'package:gbikudus_notification/data/local/hive_adapters/hive_adapters.dart';
 import 'package:gbikudus_notification/data/local/hive_adapters/hive_registrar.g.dart';
@@ -38,8 +40,10 @@ class InjectionContainer {
 
   // declarations --------------------------------------------------------------
 
-  // network
+  // cores
   Network? _network;
+  Time? _time;
+  CloudMessaging? _cloudMessaging;
 
   // hive boxes
   Box<ChurchEventNotificationModel>? _churchEventNotificationBox;
@@ -60,6 +64,13 @@ class InjectionContainer {
 
   /// [Network] instance, used for network operations.
   Network get network => _network ??= NetworkImpl();
+
+  /// [Time] instance, used for time operations.
+  Time get time => _time ??= const TimeImpl();
+
+  /// [CloudMessaging] instance, used for cloud messaging operations.
+  CloudMessaging get cloudMessaging =>
+      _cloudMessaging ??= FirebaseCloudMessaging();
 
   /// [ChurchEventRemoteDataSource] instance, interacts with the church
   /// event API.
@@ -88,6 +99,8 @@ class InjectionContainer {
       _churchEventRepository ??= ChurchEventRepositoryImpl(
         remoteDataSource: churchEventRemoteDataSource,
         localDataSource: churchEventNotificationLocalDataSource,
+        time: time,
+        cloudMessaging: cloudMessaging,
       );
 
   /// [SyncChurchEvents] use case instance

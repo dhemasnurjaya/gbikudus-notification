@@ -1,5 +1,5 @@
 import 'package:freezed_annotation/freezed_annotation.dart';
-import 'package:gbikudus_notification/domain/entities/church_event.dart';
+import 'package:gbikudus_notification/domain/entities/church_event_notification.dart';
 
 part 'get_church_event_dto.g.dart';
 
@@ -7,14 +7,14 @@ part 'get_church_event_dto.g.dart';
 @JsonSerializable()
 class GetChurchEventDto {
   /// Creates a new instance of [GetChurchEventDto].
-  /// Properties are the same as the [ChurchEvent] entity.
+  /// Properties are the same as the [ChurchEventNotification] entity.
   const GetChurchEventDto({
     required this.id,
     required this.startDate,
     required this.endDate,
     required this.title,
     required this.image,
-    required this.isNotificationSent,
+    required this.sentAt,
   });
 
   /// Deserializes JSON into a [GetChurchEventDto] instance.
@@ -40,5 +40,5 @@ class GetChurchEventDto {
   final String image;
 
   /// Indicates if the notification for the church event has been sent.
-  final bool isNotificationSent;
+  final DateTime? sentAt;
 }

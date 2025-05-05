@@ -3,7 +3,7 @@
 // ignore_for_file: type=lint
 // ignore_for_file: unused_element, deprecated_member_use, deprecated_member_use_from_same_package, use_function_type_syntax_for_parameters, unnecessary_const, avoid_init_to_null, invalid_override_different_default_values_named, prefer_expression_function_bodies, annotate_overrides, invalid_annotation_target, unnecessary_question_mark
 
-part of 'church_event.dart';
+part of 'church_event_notification.dart';
 
 // **************************************************************************
 // FreezedGenerator
@@ -15,26 +15,26 @@ final _privateConstructorUsedError = UnsupportedError(
     'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#adding-getters-and-methods-to-our-models');
 
 /// @nodoc
-mixin _$ChurchEvent {
+mixin _$ChurchEventNotification {
   int get id => throw _privateConstructorUsedError;
   DateTime get startDate => throw _privateConstructorUsedError;
   DateTime get endDate => throw _privateConstructorUsedError;
   String get title => throw _privateConstructorUsedError;
   String get image => throw _privateConstructorUsedError;
-  bool get isNotificationSent => throw _privateConstructorUsedError;
+  DateTime? get sentAt => throw _privateConstructorUsedError;
 
-  /// Create a copy of ChurchEvent
+  /// Create a copy of ChurchEventNotification
   /// with the given fields replaced by the non-null parameter values.
   @JsonKey(includeFromJson: false, includeToJson: false)
-  $ChurchEventCopyWith<ChurchEvent> get copyWith =>
+  $ChurchEventNotificationCopyWith<ChurchEventNotification> get copyWith =>
       throw _privateConstructorUsedError;
 }
 
 /// @nodoc
-abstract class $ChurchEventCopyWith<$Res> {
-  factory $ChurchEventCopyWith(
-          ChurchEvent value, $Res Function(ChurchEvent) then) =
-      _$ChurchEventCopyWithImpl<$Res, ChurchEvent>;
+abstract class $ChurchEventNotificationCopyWith<$Res> {
+  factory $ChurchEventNotificationCopyWith(ChurchEventNotification value,
+          $Res Function(ChurchEventNotification) then) =
+      _$ChurchEventNotificationCopyWithImpl<$Res, ChurchEventNotification>;
   @useResult
   $Res call(
       {int id,
@@ -42,20 +42,21 @@ abstract class $ChurchEventCopyWith<$Res> {
       DateTime endDate,
       String title,
       String image,
-      bool isNotificationSent});
+      DateTime? sentAt});
 }
 
 /// @nodoc
-class _$ChurchEventCopyWithImpl<$Res, $Val extends ChurchEvent>
-    implements $ChurchEventCopyWith<$Res> {
-  _$ChurchEventCopyWithImpl(this._value, this._then);
+class _$ChurchEventNotificationCopyWithImpl<$Res,
+        $Val extends ChurchEventNotification>
+    implements $ChurchEventNotificationCopyWith<$Res> {
+  _$ChurchEventNotificationCopyWithImpl(this._value, this._then);
 
   // ignore: unused_field
   final $Val _value;
   // ignore: unused_field
   final $Res Function($Val) _then;
 
-  /// Create a copy of ChurchEvent
+  /// Create a copy of ChurchEventNotification
   /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
@@ -65,7 +66,7 @@ class _$ChurchEventCopyWithImpl<$Res, $Val extends ChurchEvent>
     Object? endDate = null,
     Object? title = null,
     Object? image = null,
-    Object? isNotificationSent = null,
+    Object? sentAt = freezed,
   }) {
     return _then(_value.copyWith(
       id: null == id
@@ -88,20 +89,21 @@ class _$ChurchEventCopyWithImpl<$Res, $Val extends ChurchEvent>
           ? _value.image
           : image // ignore: cast_nullable_to_non_nullable
               as String,
-      isNotificationSent: null == isNotificationSent
-          ? _value.isNotificationSent
-          : isNotificationSent // ignore: cast_nullable_to_non_nullable
-              as bool,
+      sentAt: freezed == sentAt
+          ? _value.sentAt
+          : sentAt // ignore: cast_nullable_to_non_nullable
+              as DateTime?,
     ) as $Val);
   }
 }
 
 /// @nodoc
-abstract class _$$ChurchEventImplCopyWith<$Res>
-    implements $ChurchEventCopyWith<$Res> {
-  factory _$$ChurchEventImplCopyWith(
-          _$ChurchEventImpl value, $Res Function(_$ChurchEventImpl) then) =
-      __$$ChurchEventImplCopyWithImpl<$Res>;
+abstract class _$$ChurchEventNotificationImplCopyWith<$Res>
+    implements $ChurchEventNotificationCopyWith<$Res> {
+  factory _$$ChurchEventNotificationImplCopyWith(
+          _$ChurchEventNotificationImpl value,
+          $Res Function(_$ChurchEventNotificationImpl) then) =
+      __$$ChurchEventNotificationImplCopyWithImpl<$Res>;
   @override
   @useResult
   $Res call(
@@ -110,18 +112,20 @@ abstract class _$$ChurchEventImplCopyWith<$Res>
       DateTime endDate,
       String title,
       String image,
-      bool isNotificationSent});
+      DateTime? sentAt});
 }
 
 /// @nodoc
-class __$$ChurchEventImplCopyWithImpl<$Res>
-    extends _$ChurchEventCopyWithImpl<$Res, _$ChurchEventImpl>
-    implements _$$ChurchEventImplCopyWith<$Res> {
-  __$$ChurchEventImplCopyWithImpl(
-      _$ChurchEventImpl _value, $Res Function(_$ChurchEventImpl) _then)
+class __$$ChurchEventNotificationImplCopyWithImpl<$Res>
+    extends _$ChurchEventNotificationCopyWithImpl<$Res,
+        _$ChurchEventNotificationImpl>
+    implements _$$ChurchEventNotificationImplCopyWith<$Res> {
+  __$$ChurchEventNotificationImplCopyWithImpl(
+      _$ChurchEventNotificationImpl _value,
+      $Res Function(_$ChurchEventNotificationImpl) _then)
       : super(_value, _then);
 
-  /// Create a copy of ChurchEvent
+  /// Create a copy of ChurchEventNotification
   /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
@@ -131,9 +135,9 @@ class __$$ChurchEventImplCopyWithImpl<$Res>
     Object? endDate = null,
     Object? title = null,
     Object? image = null,
-    Object? isNotificationSent = null,
+    Object? sentAt = freezed,
   }) {
-    return _then(_$ChurchEventImpl(
+    return _then(_$ChurchEventNotificationImpl(
       id: null == id
           ? _value.id
           : id // ignore: cast_nullable_to_non_nullable
@@ -154,24 +158,24 @@ class __$$ChurchEventImplCopyWithImpl<$Res>
           ? _value.image
           : image // ignore: cast_nullable_to_non_nullable
               as String,
-      isNotificationSent: null == isNotificationSent
-          ? _value.isNotificationSent
-          : isNotificationSent // ignore: cast_nullable_to_non_nullable
-              as bool,
+      sentAt: freezed == sentAt
+          ? _value.sentAt
+          : sentAt // ignore: cast_nullable_to_non_nullable
+              as DateTime?,
     ));
   }
 }
 
 /// @nodoc
 
-class _$ChurchEventImpl implements _ChurchEvent {
-  const _$ChurchEventImpl(
+class _$ChurchEventNotificationImpl implements _ChurchEventNotification {
+  const _$ChurchEventNotificationImpl(
       {required this.id,
       required this.startDate,
       required this.endDate,
       required this.title,
       required this.image,
-      required this.isNotificationSent});
+      this.sentAt});
 
   @override
   final int id;
@@ -184,49 +188,49 @@ class _$ChurchEventImpl implements _ChurchEvent {
   @override
   final String image;
   @override
-  final bool isNotificationSent;
+  final DateTime? sentAt;
 
   @override
   String toString() {
-    return 'ChurchEvent(id: $id, startDate: $startDate, endDate: $endDate, title: $title, image: $image, isNotificationSent: $isNotificationSent)';
+    return 'ChurchEventNotification(id: $id, startDate: $startDate, endDate: $endDate, title: $title, image: $image, sentAt: $sentAt)';
   }
 
   @override
   bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$ChurchEventImpl &&
+            other is _$ChurchEventNotificationImpl &&
             (identical(other.id, id) || other.id == id) &&
             (identical(other.startDate, startDate) ||
                 other.startDate == startDate) &&
             (identical(other.endDate, endDate) || other.endDate == endDate) &&
             (identical(other.title, title) || other.title == title) &&
             (identical(other.image, image) || other.image == image) &&
-            (identical(other.isNotificationSent, isNotificationSent) ||
-                other.isNotificationSent == isNotificationSent));
+            (identical(other.sentAt, sentAt) || other.sentAt == sentAt));
   }
 
   @override
-  int get hashCode => Object.hash(
-      runtimeType, id, startDate, endDate, title, image, isNotificationSent);
+  int get hashCode =>
+      Object.hash(runtimeType, id, startDate, endDate, title, image, sentAt);
 
-  /// Create a copy of ChurchEvent
+  /// Create a copy of ChurchEventNotification
   /// with the given fields replaced by the non-null parameter values.
   @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   @pragma('vm:prefer-inline')
-  _$$ChurchEventImplCopyWith<_$ChurchEventImpl> get copyWith =>
-      __$$ChurchEventImplCopyWithImpl<_$ChurchEventImpl>(this, _$identity);
+  _$$ChurchEventNotificationImplCopyWith<_$ChurchEventNotificationImpl>
+      get copyWith => __$$ChurchEventNotificationImplCopyWithImpl<
+          _$ChurchEventNotificationImpl>(this, _$identity);
 }
 
-abstract class _ChurchEvent implements ChurchEvent {
-  const factory _ChurchEvent(
+abstract class _ChurchEventNotification implements ChurchEventNotification {
+  const factory _ChurchEventNotification(
       {required final int id,
       required final DateTime startDate,
       required final DateTime endDate,
       required final String title,
       required final String image,
-      required final bool isNotificationSent}) = _$ChurchEventImpl;
+      final DateTime? sentAt}) = _$ChurchEventNotificationImpl;
 
   @override
   int get id;
@@ -239,12 +243,12 @@ abstract class _ChurchEvent implements ChurchEvent {
   @override
   String get image;
   @override
-  bool get isNotificationSent;
+  DateTime? get sentAt;
 
-  /// Create a copy of ChurchEvent
+  /// Create a copy of ChurchEventNotification
   /// with the given fields replaced by the non-null parameter values.
   @override
   @JsonKey(includeFromJson: false, includeToJson: false)
-  _$$ChurchEventImplCopyWith<_$ChurchEventImpl> get copyWith =>
-      throw _privateConstructorUsedError;
+  _$$ChurchEventNotificationImplCopyWith<_$ChurchEventNotificationImpl>
+      get copyWith => throw _privateConstructorUsedError;
 }

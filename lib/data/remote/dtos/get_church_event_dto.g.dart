@@ -13,7 +13,9 @@ GetChurchEventDto _$GetChurchEventDtoFromJson(Map<String, dynamic> json) =>
       endDate: DateTime.parse(json['endDate'] as String),
       title: json['title'] as String,
       image: json['image'] as String,
-      isNotificationSent: json['isNotificationSent'] as bool,
+      sentAt: json['sentAt'] == null
+          ? null
+          : DateTime.parse(json['sentAt'] as String),
     );
 
 Map<String, dynamic> _$GetChurchEventDtoToJson(GetChurchEventDto instance) =>
@@ -23,5 +25,5 @@ Map<String, dynamic> _$GetChurchEventDtoToJson(GetChurchEventDto instance) =>
       'endDate': instance.endDate.toIso8601String(),
       'title': instance.title,
       'image': instance.image,
-      'isNotificationSent': instance.isNotificationSent,
+      'sentAt': instance.sentAt?.toIso8601String(),
     };

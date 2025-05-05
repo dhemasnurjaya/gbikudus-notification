@@ -26,7 +26,7 @@ mixin _$ChurchEventNotificationModel {
   String get endDate => throw _privateConstructorUsedError;
   String get title => throw _privateConstructorUsedError;
   String get image => throw _privateConstructorUsedError;
-  bool get isNotificationSent => throw _privateConstructorUsedError;
+  DateTime? get sentAt => throw _privateConstructorUsedError;
 
   /// Serializes this ChurchEventNotificationModel to a JSON map.
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
@@ -52,7 +52,7 @@ abstract class $ChurchEventNotificationModelCopyWith<$Res> {
       String endDate,
       String title,
       String image,
-      bool isNotificationSent});
+      DateTime? sentAt});
 }
 
 /// @nodoc
@@ -76,7 +76,7 @@ class _$ChurchEventNotificationModelCopyWithImpl<$Res,
     Object? endDate = null,
     Object? title = null,
     Object? image = null,
-    Object? isNotificationSent = null,
+    Object? sentAt = freezed,
   }) {
     return _then(_value.copyWith(
       id: null == id
@@ -99,10 +99,10 @@ class _$ChurchEventNotificationModelCopyWithImpl<$Res,
           ? _value.image
           : image // ignore: cast_nullable_to_non_nullable
               as String,
-      isNotificationSent: null == isNotificationSent
-          ? _value.isNotificationSent
-          : isNotificationSent // ignore: cast_nullable_to_non_nullable
-              as bool,
+      sentAt: freezed == sentAt
+          ? _value.sentAt
+          : sentAt // ignore: cast_nullable_to_non_nullable
+              as DateTime?,
     ) as $Val);
   }
 }
@@ -122,7 +122,7 @@ abstract class _$$ChurchEventNotificationModelImplCopyWith<$Res>
       String endDate,
       String title,
       String image,
-      bool isNotificationSent});
+      DateTime? sentAt});
 }
 
 /// @nodoc
@@ -145,7 +145,7 @@ class __$$ChurchEventNotificationModelImplCopyWithImpl<$Res>
     Object? endDate = null,
     Object? title = null,
     Object? image = null,
-    Object? isNotificationSent = null,
+    Object? sentAt = freezed,
   }) {
     return _then(_$ChurchEventNotificationModelImpl(
       id: null == id
@@ -168,10 +168,10 @@ class __$$ChurchEventNotificationModelImplCopyWithImpl<$Res>
           ? _value.image
           : image // ignore: cast_nullable_to_non_nullable
               as String,
-      isNotificationSent: null == isNotificationSent
-          ? _value.isNotificationSent
-          : isNotificationSent // ignore: cast_nullable_to_non_nullable
-              as bool,
+      sentAt: freezed == sentAt
+          ? _value.sentAt
+          : sentAt // ignore: cast_nullable_to_non_nullable
+              as DateTime?,
     ));
   }
 }
@@ -185,7 +185,7 @@ class _$ChurchEventNotificationModelImpl extends _ChurchEventNotificationModel {
       required this.endDate,
       required this.title,
       required this.image,
-      this.isNotificationSent = false})
+      this.sentAt})
       : super._();
 
   factory _$ChurchEventNotificationModelImpl.fromJson(
@@ -203,12 +203,11 @@ class _$ChurchEventNotificationModelImpl extends _ChurchEventNotificationModel {
   @override
   final String image;
   @override
-  @JsonKey()
-  final bool isNotificationSent;
+  final DateTime? sentAt;
 
   @override
   String toString() {
-    return 'ChurchEventNotificationModel(id: $id, startDate: $startDate, endDate: $endDate, title: $title, image: $image, isNotificationSent: $isNotificationSent)';
+    return 'ChurchEventNotificationModel(id: $id, startDate: $startDate, endDate: $endDate, title: $title, image: $image, sentAt: $sentAt)';
   }
 
   @override
@@ -222,14 +221,13 @@ class _$ChurchEventNotificationModelImpl extends _ChurchEventNotificationModel {
             (identical(other.endDate, endDate) || other.endDate == endDate) &&
             (identical(other.title, title) || other.title == title) &&
             (identical(other.image, image) || other.image == image) &&
-            (identical(other.isNotificationSent, isNotificationSent) ||
-                other.isNotificationSent == isNotificationSent));
+            (identical(other.sentAt, sentAt) || other.sentAt == sentAt));
   }
 
   @JsonKey(includeFromJson: false, includeToJson: false)
   @override
-  int get hashCode => Object.hash(
-      runtimeType, id, startDate, endDate, title, image, isNotificationSent);
+  int get hashCode =>
+      Object.hash(runtimeType, id, startDate, endDate, title, image, sentAt);
 
   /// Create a copy of ChurchEventNotificationModel
   /// with the given fields replaced by the non-null parameter values.
@@ -257,7 +255,7 @@ abstract class _ChurchEventNotificationModel
       required final String endDate,
       required final String title,
       required final String image,
-      final bool isNotificationSent}) = _$ChurchEventNotificationModelImpl;
+      final DateTime? sentAt}) = _$ChurchEventNotificationModelImpl;
   _ChurchEventNotificationModel._() : super._();
 
   factory _ChurchEventNotificationModel.fromJson(Map<String, dynamic> json) =
@@ -274,7 +272,7 @@ abstract class _ChurchEventNotificationModel
   @override
   String get image;
   @override
-  bool get isNotificationSent;
+  DateTime? get sentAt;
 
   /// Create a copy of ChurchEventNotificationModel
   /// with the given fields replaced by the non-null parameter values.
