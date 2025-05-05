@@ -25,6 +25,7 @@ mixin _$ChurchEventNotificationModel {
   String get startDate => throw _privateConstructorUsedError;
   String get endDate => throw _privateConstructorUsedError;
   String get title => throw _privateConstructorUsedError;
+  String get description => throw _privateConstructorUsedError;
   String get image => throw _privateConstructorUsedError;
   DateTime? get sentAt => throw _privateConstructorUsedError;
 
@@ -51,6 +52,7 @@ abstract class $ChurchEventNotificationModelCopyWith<$Res> {
       String startDate,
       String endDate,
       String title,
+      String description,
       String image,
       DateTime? sentAt});
 }
@@ -75,6 +77,7 @@ class _$ChurchEventNotificationModelCopyWithImpl<$Res,
     Object? startDate = null,
     Object? endDate = null,
     Object? title = null,
+    Object? description = null,
     Object? image = null,
     Object? sentAt = freezed,
   }) {
@@ -94,6 +97,10 @@ class _$ChurchEventNotificationModelCopyWithImpl<$Res,
       title: null == title
           ? _value.title
           : title // ignore: cast_nullable_to_non_nullable
+              as String,
+      description: null == description
+          ? _value.description
+          : description // ignore: cast_nullable_to_non_nullable
               as String,
       image: null == image
           ? _value.image
@@ -121,6 +128,7 @@ abstract class _$$ChurchEventNotificationModelImplCopyWith<$Res>
       String startDate,
       String endDate,
       String title,
+      String description,
       String image,
       DateTime? sentAt});
 }
@@ -144,6 +152,7 @@ class __$$ChurchEventNotificationModelImplCopyWithImpl<$Res>
     Object? startDate = null,
     Object? endDate = null,
     Object? title = null,
+    Object? description = null,
     Object? image = null,
     Object? sentAt = freezed,
   }) {
@@ -163,6 +172,10 @@ class __$$ChurchEventNotificationModelImplCopyWithImpl<$Res>
       title: null == title
           ? _value.title
           : title // ignore: cast_nullable_to_non_nullable
+              as String,
+      description: null == description
+          ? _value.description
+          : description // ignore: cast_nullable_to_non_nullable
               as String,
       image: null == image
           ? _value.image
@@ -184,6 +197,7 @@ class _$ChurchEventNotificationModelImpl extends _ChurchEventNotificationModel {
       required this.startDate,
       required this.endDate,
       required this.title,
+      required this.description,
       required this.image,
       this.sentAt})
       : super._();
@@ -201,13 +215,15 @@ class _$ChurchEventNotificationModelImpl extends _ChurchEventNotificationModel {
   @override
   final String title;
   @override
+  final String description;
+  @override
   final String image;
   @override
   final DateTime? sentAt;
 
   @override
   String toString() {
-    return 'ChurchEventNotificationModel(id: $id, startDate: $startDate, endDate: $endDate, title: $title, image: $image, sentAt: $sentAt)';
+    return 'ChurchEventNotificationModel(id: $id, startDate: $startDate, endDate: $endDate, title: $title, description: $description, image: $image, sentAt: $sentAt)';
   }
 
   @override
@@ -220,14 +236,16 @@ class _$ChurchEventNotificationModelImpl extends _ChurchEventNotificationModel {
                 other.startDate == startDate) &&
             (identical(other.endDate, endDate) || other.endDate == endDate) &&
             (identical(other.title, title) || other.title == title) &&
+            (identical(other.description, description) ||
+                other.description == description) &&
             (identical(other.image, image) || other.image == image) &&
             (identical(other.sentAt, sentAt) || other.sentAt == sentAt));
   }
 
   @JsonKey(includeFromJson: false, includeToJson: false)
   @override
-  int get hashCode =>
-      Object.hash(runtimeType, id, startDate, endDate, title, image, sentAt);
+  int get hashCode => Object.hash(
+      runtimeType, id, startDate, endDate, title, description, image, sentAt);
 
   /// Create a copy of ChurchEventNotificationModel
   /// with the given fields replaced by the non-null parameter values.
@@ -254,6 +272,7 @@ abstract class _ChurchEventNotificationModel
       required final String startDate,
       required final String endDate,
       required final String title,
+      required final String description,
       required final String image,
       final DateTime? sentAt}) = _$ChurchEventNotificationModelImpl;
   _ChurchEventNotificationModel._() : super._();
@@ -269,6 +288,8 @@ abstract class _ChurchEventNotificationModel
   String get endDate;
   @override
   String get title;
+  @override
+  String get description;
   @override
   String get image;
   @override

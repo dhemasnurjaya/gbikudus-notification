@@ -5,6 +5,7 @@
       "start_date": "2025-05-01",
       "end_date": "2025-05-05",
       "title": "Dev Event 01",
+      "description": "This is a description of Dev Event 01.",
       "image": "7890f1c1-9f85-44ef-8156-cbfaaf336eb6"
     },
     {
@@ -12,6 +13,7 @@
       "start_date": "2025-05-01",
       "end_date": "2025-05-05",
       "title": "Dev Event 02",
+      "description": "This is a description of Dev Event 02.",
       "image": "7890f1c1-9f85-44ef-8156-cbfaaf336eb6"
     },
     {
@@ -19,6 +21,7 @@
       "start_date": "2025-05-01",
       "end_date": "2025-05-05",
       "title": "Dev Event 03",
+      "description": "This is a description of Dev Event 03.",
       "image": "7890f1c1-9f85-44ef-8156-cbfaaf336eb6"
     }
   ]

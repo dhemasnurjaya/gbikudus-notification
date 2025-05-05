@@ -18,30 +18,33 @@ class ChurchEventNotificationModelAdapter
       for (int i = 0; i < numOfFields; i++) reader.readByte(): reader.read(),
     };
     return ChurchEventNotificationModel(
-      id: (fields[18] as num).toInt(),
-      startDate: fields[19] as String,
-      endDate: fields[20] as String,
-      title: fields[21] as String,
-      image: fields[22] as String,
-      sentAt: fields[23] as DateTime?,
+      id: (fields[26] as num).toInt(),
+      startDate: fields[27] as String,
+      endDate: fields[28] as String,
+      title: fields[29] as String,
+      description: fields[30] as String,
+      image: fields[31] as String,
+      sentAt: fields[32] as DateTime?,
     );
   }
 
   @override
   void write(BinaryWriter writer, ChurchEventNotificationModel obj) {
     writer
-      ..writeByte(6)
-      ..writeByte(18)
+      ..writeByte(7)
+      ..writeByte(26)
       ..write(obj.id)
-      ..writeByte(19)
+      ..writeByte(27)
       ..write(obj.startDate)
-      ..writeByte(20)
+      ..writeByte(28)
       ..write(obj.endDate)
-      ..writeByte(21)
+      ..writeByte(29)
       ..write(obj.title)
-      ..writeByte(22)
+      ..writeByte(30)
+      ..write(obj.description)
+      ..writeByte(31)
       ..write(obj.image)
-      ..writeByte(23)
+      ..writeByte(32)
       ..write(obj.sentAt);
   }
 

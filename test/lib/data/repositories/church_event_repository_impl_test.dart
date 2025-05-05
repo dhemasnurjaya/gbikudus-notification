@@ -53,6 +53,7 @@ void main() {
       const tChurchEventModel = ChurchEventModel(
         id: 1,
         title: 'Test Event',
+        description: 'Test Description',
         startDate: '2025-01-01',
         endDate: '2025-01-02',
         image: 'image',
@@ -62,6 +63,7 @@ void main() {
         startDate: tChurchEventModel.startDate,
         endDate: tChurchEventModel.endDate,
         title: tChurchEventModel.title,
+        description: tChurchEventModel.description,
         image: tChurchEventModel.image,
       );
       when(() => mockLocalDataSource.list()).thenAnswer(
@@ -105,6 +107,7 @@ void main() {
       const tChurchEventModel = ChurchEventModel(
         id: 1,
         title: 'Test Event',
+        description: 'Test Description',
         startDate: '2025-01-01',
         endDate: '2025-01-02',
         image: 'image',
@@ -120,6 +123,7 @@ void main() {
           startDate: tChurchEventModel.startDate,
           endDate: tChurchEventModel.endDate,
           title: tChurchEventModel.title,
+          description: tChurchEventModel.description,
           image: tChurchEventModel.image,
         ),
       );
@@ -154,6 +158,7 @@ void main() {
       const tChurchEventModel = ChurchEventModel(
         id: 1,
         title: 'Test Event',
+        description: 'Test Description',
         startDate: '2025-01-01',
         endDate: '2025-01-02',
         image: 'image',
@@ -169,6 +174,7 @@ void main() {
           startDate: tChurchEventModel.startDate,
           endDate: tChurchEventModel.endDate,
           title: tChurchEventModel.title,
+          description: tChurchEventModel.description,
           image: tChurchEventModel.image,
         ),
       );
@@ -194,6 +200,7 @@ void main() {
         startDate: '2025-01-01', // <-- start date is the same as now
         endDate: '2025-01-02', // <-- end date is after now
         title: 'Test Event',
+        description: 'Test Description',
         image: 'image',
       );
       registerFallbackValue(tChurchEventNotificationModel);
@@ -219,7 +226,7 @@ void main() {
         () => mockCloudMessaging.sendMessage(
           topic: 'church_event',
           title: tChurchEventNotificationModel.title,
-          body: '',
+          body: tChurchEventNotificationModel.description,
         ),
       );
     });
@@ -232,6 +239,7 @@ void main() {
         startDate: '2025-01-01',
         endDate: '2025-01-02', // <-- end date is before now (expired)
         title: 'Test Event',
+        description: 'Test Description',
         image: 'image',
       );
       registerFallbackValue(tChurchEventNotificationModel);
@@ -270,6 +278,7 @@ void main() {
         startDate: '2025-01-02', // <-- start date is after now (early)
         endDate: '2025-01-03',
         title: 'Test Event',
+        description: 'Test Description',
         image: 'image',
       );
       registerFallbackValue(tChurchEventNotificationModel);
@@ -329,6 +338,7 @@ void main() {
         startDate: '2025-01-01',
         endDate: '2025-01-02',
         title: 'Test Event',
+        description: 'Test Description',
         image: 'image',
       );
       registerFallbackValue(tChurchEventNotificationModel);
@@ -354,7 +364,7 @@ void main() {
         () => mockCloudMessaging.sendMessage(
           topic: 'church_event',
           title: tChurchEventNotificationModel.title,
-          body: '',
+          body: tChurchEventNotificationModel.description,
         ),
       );
     });

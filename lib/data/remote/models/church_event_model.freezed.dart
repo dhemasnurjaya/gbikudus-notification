@@ -24,6 +24,7 @@ mixin _$ChurchEventModel {
   String get startDate => throw _privateConstructorUsedError;
   String get endDate => throw _privateConstructorUsedError;
   String get title => throw _privateConstructorUsedError;
+  String get description => throw _privateConstructorUsedError;
   String get image => throw _privateConstructorUsedError;
 
   /// Serializes this ChurchEventModel to a JSON map.
@@ -43,7 +44,12 @@ abstract class $ChurchEventModelCopyWith<$Res> {
       _$ChurchEventModelCopyWithImpl<$Res, ChurchEventModel>;
   @useResult
   $Res call(
-      {int id, String startDate, String endDate, String title, String image});
+      {int id,
+      String startDate,
+      String endDate,
+      String title,
+      String description,
+      String image});
 }
 
 /// @nodoc
@@ -65,6 +71,7 @@ class _$ChurchEventModelCopyWithImpl<$Res, $Val extends ChurchEventModel>
     Object? startDate = null,
     Object? endDate = null,
     Object? title = null,
+    Object? description = null,
     Object? image = null,
   }) {
     return _then(_value.copyWith(
@@ -84,6 +91,10 @@ class _$ChurchEventModelCopyWithImpl<$Res, $Val extends ChurchEventModel>
           ? _value.title
           : title // ignore: cast_nullable_to_non_nullable
               as String,
+      description: null == description
+          ? _value.description
+          : description // ignore: cast_nullable_to_non_nullable
+              as String,
       image: null == image
           ? _value.image
           : image // ignore: cast_nullable_to_non_nullable
@@ -101,7 +112,12 @@ abstract class _$$ChurchEventModelImplCopyWith<$Res>
   @override
   @useResult
   $Res call(
-      {int id, String startDate, String endDate, String title, String image});
+      {int id,
+      String startDate,
+      String endDate,
+      String title,
+      String description,
+      String image});
 }
 
 /// @nodoc
@@ -121,6 +137,7 @@ class __$$ChurchEventModelImplCopyWithImpl<$Res>
     Object? startDate = null,
     Object? endDate = null,
     Object? title = null,
+    Object? description = null,
     Object? image = null,
   }) {
     return _then(_$ChurchEventModelImpl(
@@ -140,6 +157,10 @@ class __$$ChurchEventModelImplCopyWithImpl<$Res>
           ? _value.title
           : title // ignore: cast_nullable_to_non_nullable
               as String,
+      description: null == description
+          ? _value.description
+          : description // ignore: cast_nullable_to_non_nullable
+              as String,
       image: null == image
           ? _value.image
           : image // ignore: cast_nullable_to_non_nullable
@@ -157,6 +178,7 @@ class _$ChurchEventModelImpl implements _ChurchEventModel {
       required this.startDate,
       required this.endDate,
       required this.title,
+      required this.description,
       required this.image});
 
   factory _$ChurchEventModelImpl.fromJson(Map<String, dynamic> json) =>
@@ -171,11 +193,13 @@ class _$ChurchEventModelImpl implements _ChurchEventModel {
   @override
   final String title;
   @override
+  final String description;
+  @override
   final String image;
 
   @override
   String toString() {
-    return 'ChurchEventModel(id: $id, startDate: $startDate, endDate: $endDate, title: $title, image: $image)';
+    return 'ChurchEventModel(id: $id, startDate: $startDate, endDate: $endDate, title: $title, description: $description, image: $image)';
   }
 
   @override
@@ -188,13 +212,15 @@ class _$ChurchEventModelImpl implements _ChurchEventModel {
                 other.startDate == startDate) &&
             (identical(other.endDate, endDate) || other.endDate == endDate) &&
             (identical(other.title, title) || other.title == title) &&
+            (identical(other.description, description) ||
+                other.description == description) &&
             (identical(other.image, image) || other.image == image));
   }
 
   @JsonKey(includeFromJson: false, includeToJson: false)
   @override
-  int get hashCode =>
-      Object.hash(runtimeType, id, startDate, endDate, title, image);
+  int get hashCode => Object.hash(
+      runtimeType, id, startDate, endDate, title, description, image);
 
   /// Create a copy of ChurchEventModel
   /// with the given fields replaced by the non-null parameter values.
@@ -219,6 +245,7 @@ abstract class _ChurchEventModel implements ChurchEventModel {
       required final String startDate,
       required final String endDate,
       required final String title,
+      required final String description,
       required final String image}) = _$ChurchEventModelImpl;
 
   factory _ChurchEventModel.fromJson(Map<String, dynamic> json) =
@@ -232,6 +259,8 @@ abstract class _ChurchEventModel implements ChurchEventModel {
   String get endDate;
   @override
   String get title;
+  @override
+  String get description;
   @override
   String get image;
 

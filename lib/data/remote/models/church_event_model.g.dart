@@ -13,6 +13,7 @@ _$ChurchEventModelImpl _$$ChurchEventModelImplFromJson(
       startDate: json['start_date'] as String,
       endDate: json['end_date'] as String,
       title: json['title'] as String,
+      description: json['description'] as String,
       image: json['image'] as String,
     );
 
@@ -23,5 +24,6 @@ Map<String, dynamic> _$$ChurchEventModelImplToJson(
       'start_date': instance.startDate,
       'end_date': instance.endDate,
       'title': instance.title,
+      'description': instance.description,
       'image': instance.image,
     };

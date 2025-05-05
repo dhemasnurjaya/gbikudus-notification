@@ -14,6 +14,7 @@ sealed class ChurchEventModel with _$ChurchEventModel {
     required String startDate,
     required String endDate,
     required String title,
+    required String description,
     required String image,
   }) = _ChurchEventModel;
 

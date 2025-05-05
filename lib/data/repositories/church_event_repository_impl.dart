@@ -62,13 +62,8 @@ class ChurchEventRepositoryImpl extends ChurchEventRepository {
 
       if (churchEventModels != null) {
         for (final churchEventModel in churchEventModels) {
-          final churchEventNotificationModel = ChurchEventNotificationModel(
-            id: churchEventModel.id,
-            startDate: churchEventModel.startDate,
-            endDate: churchEventModel.endDate,
-            title: churchEventModel.title,
-            image: churchEventModel.image,
-          );
+          final churchEventNotificationModel =
+              ChurchEventNotificationModel.fromRemote(churchEventModel);
           await _localDataSource.write(churchEventNotificationModel);
         }
         return const Right(null);
@@ -101,7 +96,7 @@ class ChurchEventRepositoryImpl extends ChurchEventRepository {
         await _cloudMessaging.sendMessage(
           topic: 'church_event',
           title: event.title,
-          body: '',
+          body: event.description,
         );
         final updatedEvent = event.copyWith(sentAt: now);
         await _localDataSource.write(updatedEvent);

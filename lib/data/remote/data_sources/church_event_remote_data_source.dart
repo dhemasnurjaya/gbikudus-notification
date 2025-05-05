@@ -27,7 +27,7 @@ class ChurchEventRemoteDataSourceImpl extends ChurchEventRemoteDataSource {
       'api-v2.gbikudus.com',
       '/items/events',
       queries: {
-        'fields': 'id,start_date,end_date,title,image',
+        'fields': 'id,start_date,end_date,title,description,image',
         'sort': 'start_date',
       },
     );
