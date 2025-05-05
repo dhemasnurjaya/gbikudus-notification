@@ -3,6 +3,7 @@ import 'dart:io';
 import 'package:fpdart/fpdart.dart';
 import 'package:gbikudus_notification/core/cloud_messaging.dart';
 import 'package:gbikudus_notification/core/failures.dart';
+import 'package:gbikudus_notification/core/globals.dart';
 import 'package:gbikudus_notification/core/time.dart';
 import 'package:gbikudus_notification/data/local/local_database.dart';
 import 'package:gbikudus_notification/data/local/models/church_event_notification_model.dart';
@@ -97,7 +98,7 @@ class ChurchEventRepositoryImpl extends ChurchEventRepository {
 
       for (final event in eventsToSend) {
         await _cloudMessaging.sendMessage(
-          topic: 'church_event',
+          topic: churchEventTopic,
           title: event.title,
           body: event.description,
         );
