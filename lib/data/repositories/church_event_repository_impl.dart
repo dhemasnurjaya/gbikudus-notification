@@ -86,16 +86,7 @@ class ChurchEventRepositoryImpl extends ChurchEventRepository {
     try {
       final now = _time.now();
       final events = await _localDataSource.list();
-      final eventsToSend = events.where((event) {
-        final startDate = DateTime.parse(event.startDate);
-        final endDate = DateTime.parse(event.endDate);
-        final isUnsent = event.sentAt == null;
-        final isDue =
-            startDate.isAtSameMomentAs(now) || startDate.isBefore(now);
-        final isNotExpired = endDate.isAfter(now);
-        return isUnsent && isDue && isNotExpired;
-      }).toList();
-
+      final eventsToSend = _getEventsToSend(now, events);
       for (final event in eventsToSend) {
         await _cloudMessaging.sendMessage(
           topic: churchEventTopic,
@@ -105,7 +96,6 @@ class ChurchEventRepositoryImpl extends ChurchEventRepository {
         final updatedEvent = event.copyWith(sentAt: now);
         await _localDataSource.write(updatedEvent);
       }
-
       return const Right(null);
     } on HttpException catch (e) {
       return Left(ServerFailure(message: e.message, cause: e));
@@ -114,5 +104,19 @@ class ChurchEventRepositoryImpl extends ChurchEventRepository {
         CacheFailure(message: 'Failed to get church events', cause: e),
       );
     }
+  }
+
+  List<ChurchEventNotificationModel> _getEventsToSend(
+    DateTime now,
+    List<ChurchEventNotificationModel> events,
+  ) {
+    return events.where((event) {
+      final startDate = DateTime.parse(event.startDate);
+      final endDate = DateTime.parse(event.endDate);
+      final isUnsent = event.sentAt == null;
+      final isDue = startDate.isAtSameMomentAs(now) || startDate.isBefore(now);
+      final isNotExpired = endDate.isAfter(now);
+      return isUnsent && isDue && isNotExpired;
+    }).toList();
   }
 }
