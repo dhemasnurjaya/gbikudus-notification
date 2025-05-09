@@ -16,7 +16,7 @@ Future<void> init(InternetAddress ip, int port) async {
 
   Timer.periodic(
     const Duration(seconds: 2),
-    (timer) async => _ic.syncChurchEvents(const NoParams()),
+    (timer) => _ic.sendChurchEventNotification(const NoParams()),
   );
 }
 

@@ -10,7 +10,10 @@ abstract class LocalDatabase<TKey, T> {
   Future<T> read(TKey id);
 
   /// Delete a model from the database.
-  Future<void> delete(String id);
+  Future<void> delete(TKey id);
+
+  /// Check if the item with following [id] is exists
+  Future<bool> exists(TKey id);
 
   /// List all models in the database.
   Future<List<T>> list();

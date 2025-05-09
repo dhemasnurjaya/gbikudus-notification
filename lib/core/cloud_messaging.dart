@@ -47,10 +47,10 @@ class FirebaseCloudMessaging implements CloudMessaging {
       // Define the FCM message
       final message = {
         'message': {
-          'topic': 'daily_devotion',
+          'topic': topic,
           'notification': {
-            'title': '1 Tesalonika 5:16',
-            'body': 'Bersukacitalah senantiasa',
+            'title': title,
+            'body': body,
           },
         },
       };

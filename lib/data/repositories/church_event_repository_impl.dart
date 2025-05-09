@@ -8,6 +8,7 @@ import 'package:gbikudus_notification/core/time.dart';
 import 'package:gbikudus_notification/data/local/local_database.dart';
 import 'package:gbikudus_notification/data/local/models/church_event_notification_model.dart';
 import 'package:gbikudus_notification/data/remote/data_sources/church_event_remote_data_source.dart';
+import 'package:gbikudus_notification/data/remote/models/church_event_model.dart';
 import 'package:gbikudus_notification/domain/entities/church_event_notification.dart';
 import 'package:gbikudus_notification/domain/repositories/church_event_notification_repository.dart';
 
@@ -16,8 +17,7 @@ class ChurchEventRepositoryImpl extends ChurchEventRepository {
   /// Creates a new instance of [ChurchEventRepositoryImpl].
   ChurchEventRepositoryImpl({
     required ChurchEventRemoteDataSource remoteDataSource,
-    required LocalDatabase<String, ChurchEventNotificationModel>
-        localDataSource,
+    required LocalDatabase<int, ChurchEventNotificationModel> localDataSource,
     required Time time,
     required CloudMessaging cloudMessaging,
   })  : _remoteDataSource = remoteDataSource,
@@ -26,7 +26,7 @@ class ChurchEventRepositoryImpl extends ChurchEventRepository {
         _cloudMessaging = cloudMessaging;
 
   final ChurchEventRemoteDataSource _remoteDataSource;
-  final LocalDatabase<String, ChurchEventNotificationModel> _localDataSource;
+  final LocalDatabase<int, ChurchEventNotificationModel> _localDataSource;
   final Time _time;
   final CloudMessaging _cloudMessaging;
 
@@ -66,9 +66,7 @@ class ChurchEventRepositoryImpl extends ChurchEventRepository {
 
       if (churchEventModels != null) {
         for (final churchEventModel in churchEventModels) {
-          final churchEventNotificationModel =
-              ChurchEventNotificationModel.fromRemote(churchEventModel);
-          await _localDataSource.write(churchEventNotificationModel);
+          await _createOrUpdateEvent(churchEventModel);
         }
         return const Right(null);
       } else {
@@ -118,5 +116,24 @@ class ChurchEventRepositoryImpl extends ChurchEventRepository {
       final isNotExpired = endDate.isAfter(now);
       return isUnsent && isDue && isNotExpired;
     }).toList();
+  }
+
+  Future<void> _createOrUpdateEvent(ChurchEventModel churchEventModel) async {
+    final exists = await _localDataSource.exists(churchEventModel.id);
+    if (exists) {
+      final churchEvent = await _localDataSource.read(churchEventModel.id);
+      final updated = churchEvent.copyWith(
+        title: churchEventModel.title,
+        description: churchEventModel.description,
+        startDate: churchEventModel.startDate,
+        endDate: churchEventModel.endDate,
+        image: churchEventModel.image,
+      );
+      await _localDataSource.write(updated);
+    } else {
+      final churchEvent =
+          ChurchEventNotificationModel.fromRemote(churchEventModel);
+      await _localDataSource.write(churchEvent);
+    }
   }
 }

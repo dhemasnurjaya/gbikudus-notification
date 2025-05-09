@@ -10,7 +10,7 @@ import 'package:gbikudus_notification/data/remote/data_sources/church_event_remo
 import 'package:gbikudus_notification/data/repositories/church_event_repository_impl.dart';
 import 'package:gbikudus_notification/domain/repositories/church_event_notification_repository.dart';
 import 'package:gbikudus_notification/domain/use_cases/list_church_events.dart';
-import 'package:gbikudus_notification/domain/use_cases/sync_church_events.dart';
+import 'package:gbikudus_notification/domain/use_cases/send_church_event_notification.dart';
 import 'package:hive_ce/hive.dart';
 
 /// A container for dependency injection.
@@ -50,14 +50,14 @@ class InjectionContainer {
 
   // data sources
   ChurchEventRemoteDataSource? _churchEventRemoteDataSource;
-  LocalDatabase<String, ChurchEventNotificationModel>?
+  LocalDatabase<int, ChurchEventNotificationModel>?
       _churchEventNotificationLocalDataSource;
 
   // repositories
   ChurchEventRepository? _churchEventRepository;
 
   // use cases
-  SyncChurchEvents? _syncChurchEvents;
+  SendChurchEventNotification? _sendChurchEventNotification;
   ListChurchEvents? _listChurchEvents;
 
   // instances -----------------------------------------------------------------
@@ -87,7 +87,7 @@ class InjectionContainer {
 
   /// [LocalDatabase] instance, interacts with the local storage of church
   /// event notifications.
-  LocalDatabase<String, ChurchEventNotificationModel>
+  LocalDatabase<int, ChurchEventNotificationModel>
       get churchEventNotificationLocalDataSource =>
           _churchEventNotificationLocalDataSource ??=
               ChurchEventNotificationLocalDataSource(
@@ -103,9 +103,11 @@ class InjectionContainer {
         cloudMessaging: cloudMessaging,
       );
 
-  /// [SyncChurchEvents] use case instance
-  SyncChurchEvents get syncChurchEvents => _syncChurchEvents ??=
-      SyncChurchEvents(churchEventRepository: churchEventRepository);
+  /// [SendChurchEventNotification] use case instance
+  SendChurchEventNotification get sendChurchEventNotification =>
+      _sendChurchEventNotification ??= SendChurchEventNotification(
+        churchEventRepository: churchEventRepository,
+      );
 
   /// [ListChurchEvents] use case instance
   ListChurchEvents get listChurchEvents => _listChurchEvents ??=

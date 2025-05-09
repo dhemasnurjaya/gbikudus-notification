@@ -128,6 +128,8 @@ void main() {
           image: tChurchEventModel.image,
         ),
       );
+      when(() => mockLocalDataSource.exists(any()))
+          .thenAnswer((_) async => false);
       when(
         () => mockRemoteDataSource.getChurchEvents(),
       ).thenAnswer((_) async => tDirectusResponse);
@@ -179,6 +181,8 @@ void main() {
           image: tChurchEventModel.image,
         ),
       );
+      when(() => mockLocalDataSource.exists(any()))
+          .thenAnswer((_) async => false);
       when(() => mockRemoteDataSource.getChurchEvents())
           .thenAnswer((_) async => tDirectusResponse);
       when(() => mockLocalDataSource.write(any())).thenThrow(Exception());
