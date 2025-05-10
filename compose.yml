@@ -1,0 +1,10 @@
+services:
+  server:
+    build:
+      context: .
+    container_name: gbikudus_notification_service
+    restart: unless-stopped
+    ports:
+      - 3000:8080
+    volumes:
+      - ./data:/app/hive.db
