@@ -3,6 +3,7 @@ import 'dart:io';
 import 'package:fpdart/fpdart.dart';
 import 'package:gbikudus_notification/core/cloud_messaging.dart';
 import 'package:gbikudus_notification/core/failures.dart';
+import 'package:gbikudus_notification/core/globals.dart';
 import 'package:gbikudus_notification/core/time.dart';
 import 'package:gbikudus_notification/data/local/data_sources/church_event_notification_local_data_source.dart';
 import 'package:gbikudus_notification/data/local/models/church_event_notification_model.dart';
@@ -127,6 +128,8 @@ void main() {
           image: tChurchEventModel.image,
         ),
       );
+      when(() => mockLocalDataSource.exists(any()))
+          .thenAnswer((_) async => false);
       when(
         () => mockRemoteDataSource.getChurchEvents(),
       ).thenAnswer((_) async => tDirectusResponse);
@@ -178,6 +181,8 @@ void main() {
           image: tChurchEventModel.image,
         ),
       );
+      when(() => mockLocalDataSource.exists(any()))
+          .thenAnswer((_) async => false);
       when(() => mockRemoteDataSource.getChurchEvents())
           .thenAnswer((_) async => tDirectusResponse);
       when(() => mockLocalDataSource.write(any())).thenThrow(Exception());
@@ -224,7 +229,7 @@ void main() {
       verify(() => mockLocalDataSource.write(any()));
       verify(
         () => mockCloudMessaging.sendMessage(
-          topic: 'church_event',
+          topic: churchEventTopic,
           title: tChurchEventNotificationModel.title,
           body: tChurchEventNotificationModel.description,
         ),
@@ -362,7 +367,7 @@ void main() {
       expect(result, isLeftThat(isA<ServerFailure>()));
       verify(
         () => mockCloudMessaging.sendMessage(
-          topic: 'church_event',
+          topic: churchEventTopic,
           title: tChurchEventNotificationModel.title,
           body: tChurchEventNotificationModel.description,
         ),

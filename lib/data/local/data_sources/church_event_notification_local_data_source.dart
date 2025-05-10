@@ -4,7 +4,7 @@ import 'package:hive_ce/hive.dart';
 
 /// A local data source for managing church event notifications using Hive.
 class ChurchEventNotificationLocalDataSource
-    extends LocalDatabase<String, ChurchEventNotificationModel> {
+    extends LocalDatabase<int, ChurchEventNotificationModel> {
   /// Creates a new instance of [ChurchEventNotificationLocalDataSource].
   /// [box] is the Hive box used for storing church event notifications.
   ChurchEventNotificationLocalDataSource(Box<ChurchEventNotificationModel> box)
@@ -13,7 +13,7 @@ class ChurchEventNotificationLocalDataSource
   final Box<ChurchEventNotificationModel> _box;
 
   @override
-  Future<void> delete(String id) {
+  Future<void> delete(int id) {
     return _box.delete(id);
   }
 
@@ -23,12 +23,17 @@ class ChurchEventNotificationLocalDataSource
   }
 
   @override
-  Future<ChurchEventNotificationModel> read(String id) {
+  Future<ChurchEventNotificationModel> read(int id) {
     return Future.value(_box.get(id));
   }
 
   @override
   Future<void> write(ChurchEventNotificationModel model) {
     return _box.put(model.id, model);
+  }
+
+  @override
+  Future<bool> exists(int id) {
+    return Future.value(_box.containsKey(id));
   }
 }
